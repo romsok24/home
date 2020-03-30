@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#IFACES="$(cat /dane/net_ifaces | ssh -T admin@10.200.10.18 )"
-RXTX="$(cat /dane/net_rxtx | ssh -T admin@10.200.10.18 )"
+#IFACES="$(cat /dane/net_ifaces | ssh -T admin@10.***.***.*** )"
+RXTX="$(cat /dane/net_rxtx | ssh -T admin@10.***.***.***)"
 
 printf  "Statystyki uzycia sieci na ASUS\n"
 #echo "interface RX[GB]  TX[GB]" | column -t
