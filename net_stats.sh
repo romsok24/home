@@ -10,4 +10,4 @@ echo -e "interface RX[GB] TX[GB] SUM[GB]\n$RXTX" | column -t
 
 
 echo
-#echo $( ssh admin@10.200.10.18 uptime)
+#echo $( ssh admin@10.***.***.*** uptime)
