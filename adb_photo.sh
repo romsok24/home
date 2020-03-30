@@ -31,7 +31,7 @@ do
   echo "Bateria: $bateryjka"
   czy_brak_dev=$(adb devices)
   if [[ $czy_brak_dev == *"no"* ]]; then
-   /bin/echo -e 'Nie znaleziono telefonu podlaczonego do maliny PiZero w kotlowni! \n\n\nAlert zostal wygenerowany automatycznie - nie odpowiadaj na niego.' | /usr/bin/mailx -s 'Tel odlaczony od PiZero' o2o2@gazeta.pl -a 'From: Kotlownia Sliwice' 
+   /bin/echo -e 'Nie znaleziono telefonu podlaczonego do maliny PiZero w kotlowni! \n\n\nAlert zostal wygenerowany automatycznie - nie odpowiadaj na niego.' | /usr/bin/mailx -s 'Tel odlaczony od PiZero' *****@***** -a 'From: Kotlownia ******' 
   fi
   adb shell "am start -W -c android.intent.category.HOME -a android.intent.action.MAIN"
   adb shell "am start -a android.media.action.IMAGE_CAPTURE"
