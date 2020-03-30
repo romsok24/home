@@ -18,7 +18,7 @@ do
 			rm -f $plik 
 		else
 			nowanazwa=$plik."_wys"
-			#echo "Wykryto ruch" | mutt -s "Ruch z kamery (Cam1)" -a $plik -- 24roman12kam1@gmail.com
+			#echo "Wykryto ruch" | mutt -s "Ruch z kamery (Cam1)" -a $plik -- examp1@eample.com
 			mv $plik $nowanazwa
 		fi
 	fi
@@ -26,14 +26,14 @@ do
 	if [ $licznik -eq 2 ]; then
 		licznik=0	
  		nowanazwa=$wzorzec."_wys"
-		#echo "Wykryto ruch" | mutt -s "Ruch z kamery (Cam1)" -a $wzorzec-- 24roman12kam1@gmail.com
+		#echo "Wykryto ruch" | mutt -s "Ruch z kamery (Cam1)" -a $wzorzec-- examp1@eample.com
                 mv $wzorzec $nowanazwa
 	fi
 	echo -e "\n"
 done
 if [ $licznik -eq 1 ]; then
 	nowanazwa=$wzorzec."_wys"
-        #echo "Wykryto ruch" | mutt -s "Ruch z kamery (Cam1)" -a $plik -- 24roman12kam1@gmail.com
+        #echo "Wykryto ruch" | mutt -s "Ruch z kamery (Cam1)" -a $plik -- examp1@eample.com
         mv $plik $nowanazwa
 fi
 echo "Po: " `ls -l $ZDJECIA | wc -l`
