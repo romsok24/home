@@ -2,7 +2,7 @@
 The site is dedicated to several automation projects that I've been carring on to automate home processes.
 
 ## Author
-Please contact me at o2o2@gazeta.pl
+Please contact me at sok.r@wp.pl
 
 ## Licence
     This program is free software: you can redistribute it and/or modify
