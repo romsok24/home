@@ -1,5 +1,6 @@
 # Skrypt monitorujacy poziom pelletu w zasobniku
 # Realizacja na podst. monitorowania poziomu na wejsciu GPIO21 rpizero01
+# Konfiguracja maili: https://wiki.archlinux.org/title/Msmtp#Server_sent_empty_reply
 
 import RPi.GPIO as GPIO, os
 from time import *
