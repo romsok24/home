@@ -20,7 +20,7 @@ sleep(60)
 while True:
   dateczka=datetime.now().strftime("%d %b, %H:%M")
   if(GPIO.input(21) == 0):
-        include('/home/pi/dane/mail.py')
+       include(open('/home/pi/dane/mail.py').read())
   print('Czekam 4h do następnego sprawdzenia...')
   sleep(14400)
   
