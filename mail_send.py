@@ -16,7 +16,8 @@ Twoja Kotłownia"""
 sent_from = MAIL_USR
 to = ['mail1@example.com', 'mail2@example.com']
 subject = 'Sprawdź poziom pelletu w zasobniku'
-body = message
+subject = subject.encode('utf-8')
+body = message.encode('utf-8')
 
 email_text = """\
 From: %s
