@@ -10,6 +10,7 @@ import os
 
 def include(filename):
     if os.path.exists(filename):
+        print('Zalaczam funkcje wysylanie maili')
         execfile(filename)
 
 GPIO.setmode(GPIO.BCM)
@@ -20,7 +21,7 @@ sleep(60)
 while True:
   dateczka=datetime.now().strftime("%d %b, %H:%M")
   if(GPIO.input(21) == 0):
-       include(open('/home/pi/dane/mail.py').read())
+       os.system('/usr/bin/python3 /home/pi/dane/mail.py')
   print('Czekam 4h do następnego sprawdzenia...')
   sleep(14400)
   
