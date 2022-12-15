@@ -21,10 +21,10 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 # --- Z jakiego dnia analiza ma być---------------------------------------------------------------
-zjakiego_dnia="2"
+zjakiego_dnia="15"
 zjakiego_mca="12"
 zjakiego_roku="2022"
-zjakiej_daty=zjakiego_dnia+'.'+zjakiego_mca+'.'+zjakiej_daty
+zjakiej_daty=zjakiego_dnia+'.'+zjakiego_mca+'.'+zjakiego_roku
 infile="e:\\log\\"+zjakiego_roku+"\\"+zjakiego_mca+"\\"+zjakiego_dnia+".txt"
 print(f"Przetwarzam plik wejściowy:{bcolors.WARNING} {infile}{bcolors.ENDC}")
 #-------------------------------------------------------------------------------------------------
@@ -77,12 +77,13 @@ with open(infile,'r') as fin, open(filterfile,'w') as fout, open(alarmfile,'w') 
     for row in csv.reader(fin, delimiter=';'):
         if len(row) > 2:
             # print(row)
-            if row[1].strip() == '1' and row[2].strip() == '0' and re.match(".?\d+$", row[4].strip(), flags=0):
-                if len(row) > 9:
-                    row=row[0].split("_")+row
-                    row2 = row[0]+';'+row[1]+';'+row[10].strip()+';'+row[12].strip()
-                    writer_plom.writerow(row2.split(';'))
-                    wartosc_plomienia = row[12].strip()
+            if len(row) > 4:
+                if row[1].strip() == '1' and row[2].strip() == '0' and re.match(".?\d+$", row[4].strip(), flags=0):
+                    if len(row) > 9:
+                        row=row[0].split("_")+row
+                        row2 = row[0]+';'+row[1]+';'+row[10].strip()+';'+row[12].strip()
+                        writer_plom.writerow(row2.split(';'))
+                        wartosc_plomienia = row[12].strip()
 
             if row[2].strip() == '1' and not re.match(".*zapisane spaliny.*", row[3].strip(), flags=0):   # 1 w row[2] oznacza tekst: if not re.match(".?\d+$", row[3].strip(), flags=0):
                 row2=row[0].split("_")+row
@@ -97,8 +98,9 @@ with open(infile,'r') as fin, open(filterfile,'w') as fout, open(alarmfile,'w') 
                 row2 = row[1]+';'+str((int(row[5].strip())/10)).replace('.',',')+';'+str((int(row[7].strip())/10)).replace('.',',')+';'+(row[15])
                 writer_temperatura.writerow(row2.split(';'))
 
-            if re.match(".*alarm.*", row[4].strip(), flags=0):
-                writer_arlam.writerow(row)
+            if len(row) > 4:
+                if re.match(".*alarm.*", row[4].strip(), flags=0):
+                    writer_arlam.writerow(row)
 
             if re.match(".*stan praca.*", row[3].strip(), flags=0) or re.match(".*wygaszanie state on exit.*", row[3].strip(), flags=0):
                 czas_fmt = '%Y-%m-%d_%H:%M:%S'
@@ -122,10 +124,11 @@ with open(infile,'r') as fin, open(filterfile,'w') as fout, open(alarmfile,'w') 
                     czas_rozpalania=''
                     czas_wygaszania=''
 
-            if re.match(".*zabezpieczenie grzalki.*", row[4].strip(), flags=0):
-                drugie_rozpalanie=True
-                row2 = 'data;godz;wentylator;plomien'
-                writer_rozp.writerow(row2.split(';'))
+            if len(row) > 4:
+                if re.match(".*zabezpieczenie grzalki.*", row[4].strip(), flags=0):
+                    drugie_rozpalanie=True
+                    row2 = 'data;godz;wentylator;plomien'
+                    writer_rozp.writerow(row2.split(';'))
 
             if drugie_rozpalanie==True and row[1].strip() == '1' and row[2].strip() == '0' and re.match(".?\d+$", row[4].strip(), flags=0):
                 if len(row) > 9:
