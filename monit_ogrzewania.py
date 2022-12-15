@@ -102,13 +102,13 @@ with open(infile,'r') as fin, open(filterfile,'w') as fout, open(alarmfile,'w') 
                 if re.match(".*alarm.*", row[4].strip(), flags=0):
                     writer_arlam.writerow(row)
 
-            if re.match(".*stan praca.*", row[3].strip(), flags=0) or re.match(".*wygaszanie state on exit.*", row[3].strip(), flags=0):
+            if re.match(".*rozpalanie state on exit.*", row[3].strip(), flags=0) or re.match(".*wygaszanie state on exit.*", row[3].strip(), flags=0):
                 czas_fmt = '%Y-%m-%d_%H:%M:%S'
                 row3=row[0] + ';'+row[3]
 
                 czas = row3.split(';')[0]
                 opis = row3.split(';')[1]
-                opis = opis.replace('praca = stan praca','rozpalenie')
+                opis = opis.replace('rozpalanie state on exit','rozpalenie')
                 opis = opis.replace('wygaszanie state on exit','wygaszenie')
                 writer_czaspalenia.writerow((czas+';'+opis).split(';'))
 
