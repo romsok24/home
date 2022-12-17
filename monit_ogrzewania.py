@@ -21,7 +21,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 # --- Z jakiego dnia analiza ma być---------------------------------------------------------------
-zjakiego_dnia="15"
+zjakiego_dnia="17"
 zjakiego_mca="12"
 zjakiego_roku="2022"
 zjakiej_daty=zjakiego_dnia+'.'+zjakiego_mca+'.'+zjakiego_roku
@@ -41,7 +41,7 @@ alarmfile=katalog_out + "alarm.csv"
 rozpalaniefile=katalog_out + "2gie_rozpalanie.csv"
 plomienfile=katalog_out + "plomien.csv"
 czaspaleniafile = katalog_out + "czas_palenia.csv"
-temperaturafile = katalog_out + "temperatura.csv"
+temperaturafile = katalog_out + "temperatura_"+zjakiego_dnia+".csv"
 
 
 # =================Spr czy pendrive nie jest pełny bo to blokuje sterownik pieca i rozpalanie =================
@@ -71,8 +71,8 @@ with open(infile,'r') as fin, open(filterfile,'w') as fout, open(alarmfile,'w') 
 
     writer_plom.writerow('data;godz;wentylator;plomien'.split(';'))
     writer.writerow('data;godz;opis;plomien'.split(';'))
-    writer_temperatura.writerow(('Wykres temperatur z dniz '+ zjakiej_daty +';').split(';'))
-    writer_temperatura.writerow('godz;temp CO;temp CWU;czy pompa'.split(';'))
+    writer_temperatura.writerow(('Wykres temperatur z dnia '+ zjakiej_daty +';').split(';'))
+    writer_temperatura.writerow('godz;temp CO '+zjakiego_dnia+';temp CWU '+zjakiego_dnia+';czy pompa'.split(';'))
 
     for row in csv.reader(fin, delimiter=';'):
         if len(row) > 2:
@@ -85,7 +85,8 @@ with open(infile,'r') as fin, open(filterfile,'w') as fout, open(alarmfile,'w') 
                         writer_plom.writerow(row2.split(';'))
                         wartosc_plomienia = row[12].strip()
 
-            if row[2].strip() == '1' and not re.match(".*zapisane spaliny.*", row[3].strip(), flags=0):   # 1 w row[2] oznacza tekst: if not re.match(".?\d+$", row[3].strip(), flags=0):
+            if row[2].strip() == '1' and len(row) > 4 and not re.match(".*zapisane spaliny.*", row[3].strip(), flags=0):   # 1 w row[2] oznacza tekst: if not re.match(".?\d+$", row[3].strip(), flags=0):
+                # print(row)
                 row2=row[0].split("_")+row
                 del row2[2:5]
                 row2.pop()
