@@ -117,7 +117,7 @@ with open(cfg.infile, "r") as fin, open(filterfile, "w") as fout, open(
                     and row[2].strip() == "0"
                     and re.match(".?\d+$", row[4].strip(), flags=0)
                 ):
-                    if len(row) > 9:
+                    if len(row) > 11:
                         row = row[0].split("_") + row
                         row2 = (
                             row[0]
